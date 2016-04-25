@@ -8,10 +8,7 @@ var api = koa();
 // GET /book/:ISBN
 router.get('/book/:isbn', function*(next) {
   console.log('Got a request for ISBN ' + this.params.isbn);
-  var cursor = yield r.table('books')
-    .getAll(this.params.isbn, {index: "ISBN"})
-    .run(this.db);
-  var book = yield cursor.next();
+  var book = yield this.knex.select().from('books').where({'isbn': this.params.isbn});
   this.body = JSON.stringify({data: [book]});
   this.type = 'application/vnd.api+json';
   yield next;

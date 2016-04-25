@@ -9,14 +9,18 @@
   },
   "author": "Daniel K Lyons <fusion@storytotell.org>",
   "license": "MIT",
-  "repository": "https://gitlab.com/fusiongyro/dklbooks",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/fusiongyro/dklbooks"
+  },
   "dependencies": {
+    "knex": "^0.10.0",
     "koa": "^1.2.0",
     "koa-errors": "^1.0.1",
     "koa-mount": "^1.3.0",
     "koa-proxy": "^0.5.0",
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
-    "rethinkdb": "^2.3.0"
+    "pg": "^4.5.3"
   }
 }

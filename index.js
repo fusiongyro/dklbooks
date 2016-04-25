@@ -3,21 +3,14 @@ var mount = require('koa-mount');
 var proxy = require('koa-proxy');
 var serve = require('koa-static');
 var errors = require('koa-errors');
-var r = require('rethinkdb');
 
 // my modules
+var connectPostgres = require('./connectPostgres');
 var api = require('./api');
-var connectRethink = require('./connectRethink');
-
-// proxy to the rethinkdb admin panel
-var rethinkProxy = koa();
-rethinkProxy.use(proxy({host: 'http://localhost:8080/'}));
 
 function* root(next) {
-  var cursor = yield r.table('books').filter({ISBN: '9781888009187'}).run(this.db);
-  var result = yield cursor.next();
-  this.body = JSON.stringify(result);
-  //this.body = '<p>Test from Koa</p>';
+  var books = yield this.knex.select().table('books');
+  this.body = JSON.stringify(books);
   yield next;
 }
 
@@ -25,12 +18,11 @@ function* root(next) {
 var app = koa();
 
 app.use(errors());
-app.use(mount('/rethink', rethinkProxy));
 //app.use(mount('/static', serve('static')));
 //app.use(proxy({host: 'http://localhost:4200/'}));
-app.use(connectRethink);
+app.use(connectPostgres);
 app.use(mount('/api/v1', api));
-//app.use(root);
+app.use(root);
 
 // now listen
 app.listen(9000);
