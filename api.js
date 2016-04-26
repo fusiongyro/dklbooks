@@ -1,6 +1,5 @@
 var koa = require('koa');
 var router = require('koa-router')();
-var r = require('rethinkdb');
 
 // let's make a middleware
 var api = koa();

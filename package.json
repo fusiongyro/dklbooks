@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node index.js"
+    "start": "./node_modules/forever/bin/forever -w index.js"
   },
   "author": "Daniel K Lyons <fusion@storytotell.org>",
   "license": "MIT",
@@ -22,5 +22,9 @@
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
     "pg": "^4.5.3"
+  },
+  "devDependencies": {
+    "csv-parse": "^1.0.4",
+    "forever": "^0.15.1"
   }
 }
