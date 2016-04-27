@@ -1,6 +1,7 @@
 import angular from 'angular';
 import BookController from './BookController';
 
+import 'semantic-ui-css/semantic.css';
 import '../style/app.css';
 
 let app = () => {
